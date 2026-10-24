@@ -1,0 +1,32 @@
+name: Building Docker Image
+
+# trigger
+on:
+  push:
+    branches:
+      - main
+
+# actions
+jobs:
+  docker-build: # job name
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      packages: write
+      
+    steps:
+      - uses: action/checkout@v4
+      - name: Indication of Job Starting
+        run: echo "Job is starting.. (imaging docker)"
+        
+      - uses: docker/login-action@v3
+        with: 
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - uses: docket/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ghcr.io/${{ github.repository }}:latest
