@@ -161,7 +161,7 @@ public class PipelinesController : ControllerBase
         return Ok(pipeline);
     }
     
-    [HttpGet("pipelines")]
+    [HttpGet("charliekirk")]
     public async Task<IActionResult> GetAllPipelineIds()
     {
         var pipeline = await _pipelineDbContext.Pipelines
