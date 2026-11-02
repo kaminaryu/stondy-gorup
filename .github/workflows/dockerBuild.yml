@@ -44,6 +44,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          passphrase: ${{ secrets.PASS }}
           script: |
             cd ~/docker/ryu
             docker pull gay
