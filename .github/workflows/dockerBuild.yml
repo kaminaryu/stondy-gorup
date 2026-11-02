@@ -47,5 +47,5 @@ jobs:
           passphrase: ${{ secrets.PASS }}
           script: |
             cd ~/docker/ryu
-            docker pull gay
+            docker compose pull gay
             docker compose up -d
