@@ -160,6 +160,22 @@ public class PipelinesController : ControllerBase
 
         return Ok(pipeline);
     }
+    
+    [HttpGet("pipelines")]
+    public async Task<IActionResult> GetAllPipelineIds()
+    {
+        var pipeline = await _pipelineDbContext.Pipelines
+            .AsNoTracking()
+            .ToListAsync();
+
+        if (pipeline is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(pipeline);
+    }
+    
 
     /// <summary>
     /// Reads the route from whichever shape the client used:
