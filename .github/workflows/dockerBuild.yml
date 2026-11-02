@@ -35,6 +35,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:latest
           
   deploy-image:
+    needs: docker-build
     runs-on: ubuntu-latest
     steps:
       - name: Execute remote SSH commands using SSH key
@@ -43,4 +44,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: whoami
+          script: |
+            cd ~/docker/ryu
+            docker pull gay
+            docker compose up -d
